@@ -1,0 +1,297 @@
+\documentclass[10pt,showpacs,preprintnumbers,footinbib,amsmath,amssymb,aps,prl,twocolumn,groupedaddress,superscriptaddress,showkeys]{revtex4-1}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{hyperref}
+
+
+\begin{document}
+\title{Project 1}
+\author{Parker Brue, Sam Edwards, and Kristen Parzuchowski}
+\affiliation{Department of Physics and Astronomy, Michigan State University, East Lansing, MI 48823}
+\begin{abstract}
+We present our Ferrari algorithm for solving linear equations. We wrote the one-dimensional Poisson equation, utilizing Dirichlet boundary conditions as a linear set of equations and as a tridiagonal matrix. We compared a specialized algorithm for solving the tridiagonal matrix to an LU-decomposition of said matrix.  Our best algorithm, the specialized solver, runs as $4n$ FLOPS with $n$ the dimensionality of the matrix.
+\end{abstract}
+\maketitle
+\begin{widetext}
+\tableofcontents
+\end{widetext}
+\section{Introduction}
+As an introduction to the central ideas of the class, we studied the one-dimensional Poisson equation with Dirichlet boundary conditions. Namely, transforming the differential equation into a set of linear equations, and consequently, a matrix. We implemented a specialized algorithm and a LU-decomposition specialized algorithm. In the course of this report, we introduce the theoretical model and the different algorithms  we developed, then discuss the results of the different methods. Important points of comparison lie with relative error and relative speed of the calculation due to FLOPS. 
+
+\section{Theory}
+	\subsection{Theoretical solution of the one dimensional Poisson equation}	
+In general, the one dimensional Poisson equation reads as follows: \begin{equation} -u^{''}(x) = f(x)    \end{equation}  Through discretized approximation of {\it u}, we can solve for {\it f} using a set of linear equations: \begin{equation}\label{eq:b}
+	f(x)=-\frac{u_{i+1}+u_{i-1}-2u_{i}}{h^{2}}      ;      i=1,...,n
+	\end{equation}
+Using Dirichlet boundary conditions, $u_{0}$  = $u_{n+1}$ = 0,  We can then rewrite this as a set of linear equations in the form of a tridiagonal matrix: \begin{equation}	
+	\hat{A} \cdot \hat{u} = \hat{f}
+	\end{equation}
+Consequently, we can solve these linear equations through forward and backward substitution.
+
+	\subsection{Poisson equation}	
+For our purposes of solving the Poisson equation, we assume a function \begin{equation}
+	f(x)=100e^{-10x}
+	\end{equation}
+and a closed form solution with the Dirichlet boundary conditions:
+	\begin{equation}
+	u(x)=1-(1-e^{-10})x-e^{-10x}
+	\end{equation}
+	\subsection{Solving a Tridiagonal Matrix}
+This is a general tridiagonal matrix, derived from an equation similar to (\ref{eq:b}):
+	\begin{center}
+		$\begin{bmatrix}
+			d_{1}& e_{1} & 0 & 0 \\
+			e_{1} & d_{2} & e_{2} & 0 & \\
+			0 & e_{2} & d_{3} & e_{i-n}   \\
+			0 & 0 & e_{i-n} & d_{n} 
+	
+		\end{bmatrix}
+		 \begin{bmatrix}
+			u_{1} \\
+			u_{2} \\
+			u_{3} \\
+			u_{n} 
+		\end{bmatrix} =
+		\begin{bmatrix}
+			f_{1} \\
+			f_{2} \\
+			f_{3} \\
+			f_{n}
+		\end{bmatrix}$
+		\end{center}
+
+where $d_{i}$ are the diagonal matrix elements and $e_{i}$ are the off diagonal matrix elements. We can reduce this generalized matrix into an upper triangular matrix by first using forward substitution to yield:
+	
+\begin{center}
+		$\begin{bmatrix}
+			d_{1}& e_{1} & 0 & 0 \\
+			0 & \tilde{d}_{2} & e_{2} & 0 & \\
+			0 & 0 & \tilde{d}_{3} & e_{n-1}   \\
+			0 & 0 & 0 & \tilde{d}_{n} 
+	
+		\end{bmatrix}
+		 \begin{bmatrix}
+			u_{1} \\
+			u_{2} \\
+			u_{3} \\
+			u_{n} 
+		\end{bmatrix} =
+		\begin{bmatrix}
+			f_{1} \\
+			f_{2} \\
+			f_{3} \\
+			f_{n}
+		\end{bmatrix}$
+		\end{center}
+
+The off-diagonal elements $e_{i}$ are unchanged. The other elements are given by:
+
+	\begin{equation}
+        \label{eq:f}
+	\tilde{f}_{i}=f_{i}-\frac{\tilde{f}_{i-1}e_{i-1}}{\tilde{d}_{i-1}} ; \tilde{d}_{i}=d_{i}-\frac{e^{2}_{i-1}}{\tilde{d}_{i-1}}
+	\end{equation}
+	
+After back substitution, the elements of solution vector u are given by:
+
+	\begin{equation}
+        \label{eq:g}
+	u_{i} = \frac{\tilde{f}_{i}-e_{i}u_{i+1}}{\tilde{d}_{i}}
+	\end{equation}
+
+We were able to use the knowledge of these substitutions to create a special program to solve for our specific set of linear equations.  However, a tridiagonal matrix can be solved using LU decomposition as well.
+	
+	\subsection{LU-decomposition}
+	
+	\begin{equation} \mathbf{A=LU} \end{equation}
+$\mathbf{A}$, the matrix can be decomposed into the product of  $\mathbf{U}$, upper triangular matrix and $\mathbf{L}$, a lower triangular matrix
+	\begin{equation} \mathbf{LUx=b} \end{equation}
+	Which allows you to replace $\mathbf{A}$ and then use either triangular matrix to solve the problem.
+	\begin{equation}\label{eq:i} \mathbf{Ly=b} \end{equation}
+	\begin{equation}\label{eq:j} \mathbf{Ux=y} \end{equation}
+\section{Algorithms} \label{sec:algo}	
+
+The matrix that represents the set of linear equations referred to in equation (\ref{eq:b}) appears here as a 4x4 matrix:
+\begin{center}
+		$\begin{bmatrix}
+			2 & -1 & 0 & 0 \\
+			-1 & 2 & -1 & 0 & \\
+			0 & -1 & 2 & -1   \\
+			0 & 0 & -1 & 2 
+		\end{bmatrix}$
+		 
+		\end{center}
+This form can be generalized to any size nxn matrix, where the diagonal elements $d_{i}$ each equal 2 and the off diagonal elements $e_{i}$ each equal -1.
+
+Equation (\ref{eq:f}) can be generalized for this specific matrix, yielding: 
+
+	\begin{equation}
+        \label{eq:k}
+	\tilde{d}_{i}=\frac{i+1}{i};  
+	\tilde{f}_{i}=f_{i}+\frac{\tilde{f}_{i-1}}{\tilde{d}_{i-1}}
+	\end{equation}
+
+Equation (\ref{eq:g}) can be reduced to:
+
+	\begin{equation}
+	u_{i} = \frac{\tilde{f}_{i}+u_{i+1}}{\tilde{d}_{i}}
+	\end{equation}
+
+By computing $d_{i}$ once per iteration in a loop saves one operation in the forward substitution. Replacing the off diagonal elements with -1 when possible, and calculating the diagonal elements using the pattern seen in equation (\ref{eq:k}) also reduces the number of FLOPs. In this way, the specialized application of the forward and backward substitution algorithms are reduced from approximately 9n operations down to 4n.
+
+In LU decomposition, the lower triangular matrix takes the form:
+\begin{center}
+$\begin{bmatrix}
+			1 & 0 & 0 & 0 \\
+			l_{21} & 1 & 0 & 0 & \\
+			l_{31} &l_{32}& 1 & 0   \\
+			l_{41}&l_{42}&l_{43}& 1 
+\end{bmatrix}$
+\end{center}
+The upper triangular matrix takes the form:
+\begin{center}
+$\begin{bmatrix}
+			u_{11}&u_{12}&u_{13}&u_{14}\\
+			0 & u_{22} & u_{23}& u_{24} & \\
+			0 & 0 & u_{33} & u_{34}   \\
+			0 & 0 & 0 & u_{44}
+\end{bmatrix}$
+\end{center}
+In first using the lower triangular matrix, equation (\ref{eq:i}) can be solved. The solution found for $x$ can then be used to solve equation (\ref{eq:j}).
+\section{Methods}
+
+        \subsection{Implementing a Specialized Algorithm}
+This algorithm solves the specialized tridiagonal matrix from section (\ref{sec:algo}) found when solving the poisson equation. The method is demonstrated in psuedocode as:
+\begin{algorithm}
+\caption{Specialized Algorithm}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{}{}
+\For {$i = 2; i < N$} 
+\State f[i] += f[i-1]/d[i-1]
+\EndFor
+\State u[N-1] = f[N-1]/d[N-1]
+\For {$i = N-2; i > 0$}
+\State u[i] = (f[i]+u[i+1])/d[i]
+\EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+Two for loops are implemented. The first performs forward substitution and the second performs backward substitution.
+
+        \subsection{Implementing an LU decomposition Algorithm}
+This algorithm uses the armadillo library to perform LU decomposition and solve the poisson equation. This method is demonstrated in psuedocode as:
+\begin{algorithm}
+\caption{LU decomposition}\label{euclid}
+\begin{algorithmic}[1]
+\Procedure{}{}
+\State arma::lu(L,U,A)
+\State y = solve(L,b)
+\State solution = solve(U,y)
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\section{Results and discussions}
+
+	\subsection{Relative error}
+
+In order to properly test the effectiveness of our algorithm, we are measuring the closeness, or relative error of our analytic solution:
+
+	\begin{equation}
+	\epsilon_{i} = log_{10}(|\frac{v_{i}-u_{i}}{u_{i}}|)  ; i = 1,...,n
+	\label{error}
+	\end{equation}
+$u_{i}$ is the analytic solution, and $v_{i}$ is the numerical solution.
+
+ We ran the program with the step sizes of n = 1, 2 , and 3, corresponding to a 10x10, 100x100, and 1000x1000 matrix. We also optimized our program through specialization. Diagonal matrix elements were set to 2 and off-diagonal elements were set to -1. FLOPS were reduced from 9n in the general case to 4n in the specialized case. The program was much more efficient, and faster as a consequence of the precalculation. 
+
+ Analyzing step size, there is a clear difference from N=$10^{1}$ and N=$10^{2}$, while N=$10^{2}$ to N=$10^{3}$ does not seem to superficially change as much as is demonstrated in the graphs below.
+ 
+%insert path specific for computer
+\begin{figure}[!ht]
+	\centering
+	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out1.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/parzuch9/PHY480/project1/out1.pdf}
+	\label{uvx}
+	\caption{ n = 1. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out2.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/parzuch9/PHY480/project1/out2.pdf}
+
+	\label{uvx}
+	\caption{n = 2. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out3.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/parzuch9/Physics480/project1/out3.pdf}
+
+	\label{uvx}
+	\caption{n =3.  The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
+\end{figure}
+
+Further investigation shows that the overabundance of data points does give us the full curve, it also results in a much larger error, as shown in the table below. There seems to be a saddle point situated around N=$10^{2}$, wherein the calculation is optimized in regard to completeness of the graph and uncertainty from the numerical solution.
+
+\begin{center}
+	\begin{tabular}{cc}
+		\hline \hline
+			Step Size ($n$) &  Max Relative Error ($|\epsilon|$)\\
+			\hline
+			1 & 1.101\\
+			2 & 3.079\\
+			3 & 5.079\\
+			4 & 7.079\\
+			5 & 9.079\\
+			6 & 11.50\\
+			7 & 12.27\\
+			\hline
+			\label{errortable}
+	\end{tabular}
+\end{center}
+	
+	The above table shows us the absolute valued relative error results from varying step sizes of $N=10^{n}$ from 1 to 7. The step size error for n=7 seems to be the breaking point, the error starts to widely fluctuate. Therefore, the largest step size we would reccomend for an accurate result is n=6.  
+
+
+	For further analysis, we included a timer in both the specialized program and the LU program, and compared the timing values for, for as large square matrices as either could reasonably calculate.
+
+	\begin{center}
+		\begin{tabular}{ccc}
+			\hline \hline
+			Column Size & Specialized Time (s) & LU Time (s)\\
+			\hline		
+			10\textsuperscript{1} & $1.7 \cdot 10^{-5}$      & $1.62 \cdot 10^{-4}$  \\
+			10\textsuperscript{2} & $2.4 \cdot 10^{-5}$      &  $1.15 \cdot 10^{-3}$ \\
+			10\textsuperscript{3} & $2.12 \cdot 10^{-4}$    &  $3.34 \cdot 10^{-2}$  \\
+			10\textsuperscript{4} & $1.24 \cdot 10^{-3}$    &   5.04\\
+			10\textsuperscript{5} & $1.28 \cdot 10^{-2}$    & --\\
+			10\textsuperscript{6} & $1.26 \cdot 10^{-1}$    & --\\
+			10\textsuperscript{7} & 1.26                               & --\\
+			\hline
+			\label{timingtable}
+		\end{tabular}
+	\end{center}
+	We found that specialized time was around an order of magnitude faster than LU time, as expected, When we reached powers of $10^{4}$, the difference jumped several orders of magnitude. We were unable to compute a LU matrix at $N=10^{5}$, initializing the program with this input would immediately sieze the program up. For the specialized solver, $N=10^{7}$ was the most reasonable limit, guessing at the size of the output file for $N=10^{7}$, ~400MB, we can assume that $N=10^{8}$ would not only take 10 or more seconds to compute but would result in a file size well over a GB, if not several GB. Orders above this would only increase  file size and computation time. \\
+
+
+
+
+\section{Conclusions}
+	\subsection{Results}
+	We investigated a few ways of solving a tridiagonal matrix problem. As expected, specialization outperforms generalized "brute force" methods. Specialization is faster, and in this case, can be taken out into greater orders of magnitude. Although there is improvement in this realm, we found that the propgation of numerical errors becomes unmanagable after a certain point. Our sweet spot was around the order of $10^{2}$.
+
+	\subsection{Future Prospects}
+	There may be a method to optimize the LU decomposition program, to allow for us to solve problems greater than $10^{4}$, it might be useful to look into this. 
+
+
+\end{document}

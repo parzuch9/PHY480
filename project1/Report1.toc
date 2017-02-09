@@ -1,0 +1,20 @@
+\contentsline {title}{Project 1}{1}{section*.2}
+\contentsline {abstract}{Abstract}{1}{section*.1}
+\tocdepth@munge 
+\contentsline {section}{\numberline {}Contents}{1}{section*.3}
+\tocdepth@restore 
+\contentsline {section}{\numberline {}Introduction}{1}{section*.4}
+\contentsline {section}{\numberline {}Theory}{1}{section*.5}
+\contentsline {subsection}{\numberline {}Theoretical solution of the one dimensional Poisson equation}{1}{section*.6}
+\contentsline {subsection}{\numberline {}Poisson equation}{2}{section*.7}
+\contentsline {subsection}{\numberline {}Solving a Tridiagonal Matrix}{2}{section*.8}
+\contentsline {subsection}{\numberline {}LU-decomposition}{2}{section*.9}
+\contentsline {section}{\numberline {}Algorithms}{2}{section*.10}
+\contentsline {section}{\numberline {}Methods}{3}{section*.11}
+\contentsline {subsection}{\numberline {}Implementing a Specialized Algorithm}{3}{section*.12}
+\contentsline {subsection}{\numberline {}Implementing an LU decomposition Algorithm}{3}{section*.13}
+\contentsline {section}{\numberline {}Results and discussions}{3}{section*.14}
+\contentsline {subsection}{\numberline {}Relative error}{3}{section*.15}
+\contentsline {section}{\numberline {}Conclusions}{4}{section*.16}
+\contentsline {subsection}{\numberline {}Results}{4}{section*.17}
+\contentsline {subsection}{\numberline {}Future Prospects}{5}{section*.18}

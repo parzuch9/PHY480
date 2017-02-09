@@ -1,0 +1,18 @@
+\BOOKMARK [0][-]{section*.2}{Project 1}{}% 2
+\BOOKMARK [1][-]{section*.1}{Abstract}{section*.2}% 1
+\BOOKMARK [1][-]{section*.3}{Contents}{section*.2}% 3
+\BOOKMARK [1][-]{section*.4}{Introduction}{section*.2}% 4
+\BOOKMARK [1][-]{section*.5}{Theory}{section*.2}% 5
+\BOOKMARK [2][-]{section*.6}{Theoretical solution of the one dimensional Poisson equation}{section*.5}% 6
+\BOOKMARK [2][-]{section*.7}{Poisson equation}{section*.5}% 7
+\BOOKMARK [2][-]{section*.8}{Solving a Tridiagonal Matrix}{section*.5}% 8
+\BOOKMARK [2][-]{section*.9}{LU-decomposition}{section*.5}% 9
+\BOOKMARK [1][-]{section*.10}{Algorithms}{section*.2}% 10
+\BOOKMARK [1][-]{section*.11}{Methods}{section*.2}% 11
+\BOOKMARK [2][-]{section*.12}{Implementing a Specialized Algorithm}{section*.11}% 12
+\BOOKMARK [2][-]{section*.13}{Implementing an LU decomposition Algorithm}{section*.11}% 13
+\BOOKMARK [1][-]{section*.14}{Results and discussions}{section*.2}% 14
+\BOOKMARK [2][-]{section*.15}{Relative error}{section*.14}% 15
+\BOOKMARK [1][-]{section*.16}{Conclusions}{section*.2}% 16
+\BOOKMARK [2][-]{section*.17}{Results}{section*.16}% 17
+\BOOKMARK [2][-]{section*.18}{Future Prospects}{section*.16}% 18

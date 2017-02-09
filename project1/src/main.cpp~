@@ -1,0 +1,9 @@
+/*
+PHY 480 - Computational Physics - Project 1
+
+Solve the one-dimensional Poisson equation with Dirichlet boundary conditions 
+by rewritting it as a set of linear equations
+*/
+
+#include<iostream>
+using std::cout; using std::endl;
