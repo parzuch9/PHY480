@@ -33,6 +33,7 @@ int main(int argc, char *argv[]){
         filename = argv[1]; // first command line argument after name of program
         exponent = atoi(argv[2]);
     }
+    double maxerr = 0;
     // Loop over powers of 10
     for (int i = 1; i <= exponent; i++){
       int  n = (int) pow(10.0,i);
@@ -72,11 +73,13 @@ int main(int argc, char *argv[]){
       ofile << setiosflags(ios::showpoint | ios::uppercase);
       for (int i = 0; i < n ;i++) {
 	double RelativeError = fabs((exact(x(i))-solution(i))/exact(x(i)));
+	if (fabs(log10(RelativeError))>maxerr) maxerr = fabs(log10(RelativeError));
 	ofile << setw(15) << setprecision(8) << x(i);
 	ofile << setw(15) << setprecision(8) << solution(i);
 	ofile << setw(15) << setprecision(8) << exact(x(i));
         ofile << setw(15) << setprecision(8) << log10(RelativeError) << endl;
       }
+      cout<<"Max error: "<<maxerr<<endl;
       ofile.close();
     }
     return 0;

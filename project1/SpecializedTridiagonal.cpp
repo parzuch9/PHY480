@@ -33,6 +33,7 @@ int main(int argc, char *argv[]){
     //clock_t start, finish;
     //start = clock();
 
+    double maxerr;
     // Loop over powers of 10
     for (int i = 1; i <= exponent; i++){
       int  n = (int) pow(10.0,i); // 10^i returns a float, recast to an integer
@@ -42,6 +43,8 @@ int main(int argc, char *argv[]){
       string argument = to_string(i);
       // Final filename as filename-i-
       fileout.append(argument);
+
+      maxerr = 0;
 
       double h = 1.0/((double) n);
       double hh = h*h;
@@ -77,12 +80,13 @@ int main(int argc, char *argv[]){
       for (int i = 1; i < n;i++) {
 	double xval = x[i];
  	 double RelativeError = fabs((exact(xval)-u[i])/exact(xval));
-         ofile << setw(15) << setprecision(8) << xval;
+	 if (fabs(log10(RelativeError))>maxerr) maxerr = fabs(log10(RelativeError));
+	 ofile << setw(15) << setprecision(8) << xval;
          ofile << setw(15) << setprecision(8) << u[i];
          ofile << setw(15) << setprecision(8) << exact(xval);
          ofile << setw(15) << setprecision(8) << log10(RelativeError) << endl;
       }
-
+      cout<<"Max error: "<<maxerr<<endl;
       ofile.close();
       delete [] x; delete [] d; delete [] f; delete [] u;
     }

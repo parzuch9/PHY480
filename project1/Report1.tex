@@ -164,6 +164,7 @@ $\begin{bmatrix}
 \end{center}
 In first using the lower triangular matrix, equation (\ref{eq:i}) can be solved. The solution found for $x$ can then be used to solve equation (\ref{eq:j}).
 \section{Methods}
+We will briefly explain the methods implemented in this project. For a complete understanding, visit our Github page: (\url{https://github.com/parzuch9/KESP/Project1}).
 
         \subsection{Implementing a Specialized Algorithm}
 This algorithm solves the specialized tridiagonal matrix from section (\ref{sec:algo}) found when solving the poisson equation. The method is demonstrated in psuedocode as:
@@ -218,7 +219,7 @@ $u_{i}$ is the analytic solution, and $v_{i}$ is the numerical solution.
 \begin{figure}[!ht]
 	\centering
 	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out1.pdf}
-	\includegraphics[width=0.5\textwidth]{/home/parzuch9/PHY480/project1/out1.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/kristen/PHY480/project1/out1.pdf}
 	\label{uvx}
 	\caption{ n = 1. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
 \end{figure}
@@ -226,7 +227,7 @@ $u_{i}$ is the analytic solution, and $v_{i}$ is the numerical solution.
 \begin{figure}[!ht]
 	\centering
 	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out2.pdf}
-	\includegraphics[width=0.5\textwidth]{/home/parzuch9/PHY480/project1/out2.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/kristen/PHY480/project1/out2.pdf}
 
 	\label{uvx}
 	\caption{n = 2. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
@@ -235,7 +236,7 @@ $u_{i}$ is the analytic solution, and $v_{i}$ is the numerical solution.
 \begin{figure}[!ht]
 	\centering
 	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out3.pdf}
-	\includegraphics[width=0.5\textwidth]{/home/parzuch9/Physics480/project1/out3.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/kristen/PHY480/project1/out3.pdf}
 
 	\label{uvx}
 	\caption{n =3.  The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
@@ -270,20 +271,19 @@ Further investigation shows that the overabundance of data points does give us t
 			\hline \hline
 			Column Size & Specialized Time (s) & LU Time (s)\\
 			\hline		
-			10\textsuperscript{1} & $1.7 \cdot 10^{-5}$      & $1.62 \cdot 10^{-4}$  \\
-			10\textsuperscript{2} & $2.4 \cdot 10^{-5}$      &  $1.15 \cdot 10^{-3}$ \\
-			10\textsuperscript{3} & $2.12 \cdot 10^{-4}$    &  $3.34 \cdot 10^{-2}$  \\
-			10\textsuperscript{4} & $1.24 \cdot 10^{-3}$    &   5.04\\
-			10\textsuperscript{5} & $1.28 \cdot 10^{-2}$    & --\\
-			10\textsuperscript{6} & $1.26 \cdot 10^{-1}$    & --\\
-			10\textsuperscript{7} & 1.26                               & --\\
+			10\textsuperscript{1} & $9.0 \cdot 10^{-6}$      & $1.62 \cdot 10^{-4}$  \\
+			10\textsuperscript{2} & $1.3 \cdot 10^{-5}$      &  $1.15 \cdot 10^{-3}$ \\
+			10\textsuperscript{3} & $9.1 \cdot 10^{-5}$    &  $3.34 \cdot 10^{-2}$  \\
+			10\textsuperscript{4} & $8.48 \cdot 10^{-4}$    &   5.04\\
+			10\textsuperscript{5} & $8.79 \cdot 10^{-3}$    & --\\
+			10\textsuperscript{6} & $1.03 \cdot 10^{-1}$    & --\\
+			10\textsuperscript{7} & 0.908                               & --\\
+                        10\textsuperscript{8} & 9.64                               & --\\
 			\hline
 			\label{timingtable}
 		\end{tabular}
 	\end{center}
-	We found that specialized time was around an order of magnitude faster than LU time, as expected, When we reached powers of $10^{4}$, the difference jumped several orders of magnitude. We were unable to compute a LU matrix at $N=10^{5}$, initializing the program with this input would immediately sieze the program up. For the specialized solver, $N=10^{7}$ was the most reasonable limit, guessing at the size of the output file for $N=10^{7}$, ~400MB, we can assume that $N=10^{8}$ would not only take 10 or more seconds to compute but would result in a file size well over a GB, if not several GB. Orders above this would only increase  file size and computation time. \\
-
-
+	We found that specialized time was around an order of magnitude faster than LU time, as expected, When we reached powers of $10^{4}$, the difference jumped several orders of magnitude. We were unable to compute a LU matrix at $N=10^{5}$, initializing the program with this input would immediately sieze the program up. For the specialized solver, $N=10^{7}$ was the most reasonable limit, guessing at the size of the output file for $N=10^{8}$, ~1.8GB, we can assume that $N=10^{9}$ would not only take more than 1 min to compute and much longer to print to file, but would result in a file size well over a few GB. Orders above this would only increase file size and computation time. \\
 
 
 \section{Conclusions}
@@ -292,6 +292,9 @@ Further investigation shows that the overabundance of data points does give us t
 
 	\subsection{Future Prospects}
 	There may be a method to optimize the LU decomposition program, to allow for us to solve problems greater than $10^{4}$, it might be useful to look into this. 
+
+        \subsection{Acknowledgements}
+        We thank Professor Morten Hjorth-Jensen for our fruitful discussions and for providing us with much of the C++ code to get started on this project. 
 
 
 \end{document}
