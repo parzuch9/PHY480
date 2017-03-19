@@ -1,0 +1,34 @@
+\documentclass[10pt,showpacs,preprintnumbers,footinbib,amsmath,amssymb,aps,prl,twocolumn,groupedaddress,superscriptaddress,showkeys]{revtex4-1}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage{color}
+\begin{document}
+\title{Project 1}
+\author{A.~N.~Author}
+\affiliation{Department of Something, University of Somewhere, Outer Space}
+\begin{abstract}
+We present our Ferrari algorithm for solving linear equations. Our best algorithm runs as $4n$ FLOPS with $n$ the dimensionality of the matrix.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+\section{Theory, algorithms and methods}
+
+\section{Results and discussions}
+
+\begin{figure}[hbtp]
+\includegraphics[scale=0.4]{test1.pdf}
+\caption{Exact and numerial solutions for $n=10$ mesh points.} 
+\label{fig:n10points}
+\end{figure}
+
+\section{Conclusions}
+
+\begin{thebibliography}{99}
+\bibitem{miller2006} G.~A.~Miller, A.~K.~Opper, and E.~J.~Stephenson, Annu.~Rev.~Nucl.~Sci.~{\bf 56}, 253 (2006).
+\end{thebibliography}
+
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.28)  9 FEB 2017 10:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.28)  9 FEB 2017 16:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -381,16 +381,16 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 )
-Class revtex4-1 Info: Patching array package. on input line 13.
+Class revtex4-1 Info: Patching array package. on input line 11.
 
 
 Class revtex4-1 Warning: Repair the float package.
 
-Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 13.
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 11.
 
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 13.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 13.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 13.
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 11.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 11.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 11.
 (./Report1.aux
 
 LaTeX Warning: Label `euclid' multiply defined.
@@ -404,20 +404,20 @@ LaTeX Warning: Label `uvx' multiply defined.
 )
 \openout1 = `Report1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
-LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
  (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count127
@@ -447,7 +447,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box46
-Package hyperref Info: Link coloring ON on input line 13.
+Package hyperref Info: Link coloring ON on input line 11.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -457,23 +457,23 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count133
 )
-LaTeX Info: Redefining \ref on input line 13.
-LaTeX Info: Redefining \pageref on input line 13.
-LaTeX Info: Redefining \nameref on input line 13.
+LaTeX Info: Redefining \ref on input line 11.
+LaTeX Info: Redefining \pageref on input line 11.
+LaTeX Info: Redefining \nameref on input line 11.
 
 (./Report1.out) (./Report1.out)
 \@outlinefile=\write4
 \openout4 = `Report1.out'.
 
-Class revtex4-1 Info: Taking \maketitle back from hyperref on input line 13.
+Class revtex4-1 Info: Taking \maketitle back from hyperref on input line 11.
 \openout3 = `Report1Notes.bib'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 18.
+LaTeX Font Info:    Try loading font information for U+msa on input line 16.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 18.
+LaTeX Font Info:    Try loading font information for U+msb on input line 16.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -482,121 +482,97 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout5 = `Report1.toc'.
 
 
-Underfull \hbox (badness 2302) in paragraph at lines 34--36
+Underfull \hbox (badness 2302) in paragraph at lines 32--34
 \OT1/cmr/m/n/10 Consequently, we can solve these lin-ear equa-tions
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
-Package hyperref Warning: Suppressing empty link on input line 169.
+Package hyperref Warning: Suppressing empty link on input line 168.
 
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 171.
+put line 170.
 ! Missing \endcsname inserted.
 <to be read again> 
                    \c@float@type 
-l.183 \end{algorithm}
+l.182 \end{algorithm}
                      
 ? 
 ! Missing number, treated as zero.
 <to be read again> 
                    \endcsname 
-l.183 \end{algorithm}
+l.182 \end{algorithm}
                      
 ? 
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.183 \end{algorithm}
+l.182 \end{algorithm}
                      
 ? 
 ! You can't use `\vadjust' in vertical mode.
 <argument> \vadjust 
                     {\do@output@cclv {\@add@float }}\@Esphack 
-l.183 \end{algorithm}
+l.182 \end{algorithm}
                      
 ? 
 ! Missing \endcsname inserted.
 <to be read again> 
                    \c@float@type 
-l.197 \end{algorithm}
+l.196 \end{algorithm}
                      
 ? 
 ! Missing number, treated as zero.
 <to be read again> 
                    \endcsname 
-l.197 \end{algorithm}
+l.196 \end{algorithm}
                      
 ? 
 ! Extra \endcsname.
 <recently read> \endcsname 
                            
-l.197 \end{algorithm}
+l.196 \end{algorithm}
                      
 ? 
 ! You can't use `\vadjust' in vertical mode.
 <argument> \vadjust 
                     {\do@output@cclv {\@add@float }}\@Esphack 
-l.197 \end{algorithm}
+l.196 \end{algorithm}
                      
 ? 
+</home/kristen/PHY480/project1/output/out1.pdf, id=141, 578.16pt x 433.62pt>
+File: /home/kristen/PHY480/project1/output/out1.pdf Graphic file (type pdf)
 
-LaTeX Warning: File `/home/healthycheekums/Physics480/project1/Report/out1.pdf'
- not found on input line 221.
+<use /home/kristen/PHY480/project1/output/out1.pdf>
+Package pdftex.def Info: /home/kristen/PHY480/project1/output/out1.pdf used on 
+input line 220.
+(pdftex.def)             Requested size: 255.0pt x 191.24992pt.
 
-
-! Package pdftex.def Error: File `/home/healthycheekums/Physics480/project1/Rep
-ort/out1.pdf' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.221 ...kums/Physics480/project1/Report/out1.pdf}
-                                                  
-? 
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 221--223
+Overfull \hbox (9.0pt too wide) in paragraph at lines 220--222
  [][] 
  []
 
+</home/kristen/PHY480/project1/output/out2.pdf, id=142, 578.16pt x 433.62pt>
+File: /home/kristen/PHY480/project1/output/out2.pdf Graphic file (type pdf)
 
-LaTeX Warning: File `/home/healthycheekums/Physics480/project1/Report/out2.pdf'
- not found on input line 229.
+<use /home/kristen/PHY480/project1/output/out2.pdf>
+Package pdftex.def Info: /home/kristen/PHY480/project1/output/out2.pdf used on 
+input line 228.
+(pdftex.def)             Requested size: 255.0pt x 191.24992pt.
 
-
-! Package pdftex.def Error: File `/home/healthycheekums/Physics480/project1/Rep
-ort/out2.pdf' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.229 ...kums/Physics480/project1/Report/out2.pdf}
-                                                  
-? 
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 229--230
+Overfull \hbox (9.0pt too wide) in paragraph at lines 228--229
  [][] 
  []
 
+</home/kristen/PHY480/project1/output/out3.pdf, id=143, 578.16pt x 433.62pt>
+File: /home/kristen/PHY480/project1/output/out3.pdf Graphic file (type pdf)
 
-LaTeX Warning: File `/home/healthycheekums/Physics480/project1/Report/out3.pdf'
- not found on input line 238.
+<use /home/kristen/PHY480/project1/output/out3.pdf>
+Package pdftex.def Info: /home/kristen/PHY480/project1/output/out3.pdf used on 
+input line 237.
+(pdftex.def)             Requested size: 255.0pt x 191.24992pt.
 
-
-! Package pdftex.def Error: File `/home/healthycheekums/Physics480/project1/Rep
-ort/out3.pdf' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.238 ...kums/Physics480/project1/Report/out3.pdf}
-                                                  
-? 
-
-Overfull \hbox (9.0pt too wide) in paragraph at lines 238--239
+Overfull \hbox (9.0pt too wide) in paragraph at lines 237--238
  [][] 
  []
 
@@ -605,51 +581,55 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.261 \end{center}
-                  ]
+l.260 \end{center}
+                   </home/kristen/PHY480/project1/output/out1.pdf>]
 
 LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
- on input line 261.
+ on input line 260.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 284--285
 
  []
 
+No file Report1.bbl.
 [4pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.292 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-3}) has been already used, duplicate ignored
+l.298 \end{document}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{figure.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.292 
-      ]
-No file Report1.bbl.
-[5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 297.
+l.298 \end{document}
+                     </home/kristen/PHY480/project1/output/out2.pdf> </home/kri
+sten/PHY480/project1/output/out3.pdf
+
+pdfTeX warning: pdflatex (file /home/kristen/PHY480/project1/output/out3.pdf): 
+PDF inclusion: multiple pdfs with page group included in a single page
+>] [5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 298.
  (./Report1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 297.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 297.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 298.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 298.
 Package rerunfilecheck Info: File `Report1.out' has not changed.
-(rerunfilecheck)             Checksum: 14704D77B58B1CD1212F76AB5A283FAB;1170.
+(rerunfilecheck)             Checksum: 95955E655A87276AC9B13686723B6D8D;1235.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 8682 strings out of 493304
- 121716 string characters out of 6139870
+ 8697 strings out of 493304
+ 122349 string characters out of 6139870
  236280 words of memory out of 5000000
- 11975 multiletter control sequences out of 15000+600000
- 15107 words of font info for 56 fonts, out of 8000000 for 9000
+ 11989 multiletter control sequences out of 15000+600000
+ 15108 words of font info for 56 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 34i,9n,29p,688b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,9n,29p,703b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
@@ -667,11 +647,11 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmtt9.pfb>
-Output written on Report1.pdf (5 pages, 213313 bytes).
+public/amsfonts/cm/cmtt10.pfb>
+Output written on Report1.pdf (5 pages, 261259 bytes).
 PDF statistics:
- 228 PDF objects out of 1000 (max. 8388607)
- 200 compressed objects within 2 object streams
- 42 named destinations out of 1000 (max. 500000)
- 145 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 237 compressed objects within 3 object streams
+ 43 named destinations out of 1000 (max. 500000)
+ 168 words of extra memory for PDF output out of 10000 (max. 10000000)
 
