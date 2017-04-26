@@ -1,0 +1,289 @@
+\documentclass[10pt,showpacs,preprintnumbers,footinbib,amsmath,amssymb,aps,prl,twocolumn,groupedaddress,superscriptaddress,showkeys]{revtex4-1}
+\usepackage{graphicx}
+\usepackage{dcolumn}
+\usepackage{bm}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue]{hyperref}
+
+\usepackage{listings}
+\usepackage{color}
+\usepackage{caption}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\begin{document}
+\title{Project 2}
+\author{Kristen Parzuchowski, Spencer Ammerman and Colin Gordon}
+\affiliation{Michigan State University, East Lansing, MI}
+\begin{abstract}
+We present our Jacobi eigenvalue solver for two particles in a 3-dimensional harmonic oscillator. The precision of this algorithm is determined through comparison of eigenvalues found using alternative methods. We analyze the speed of this algorithm and the effect of the number of mesh points used. %Our best algorithm runs as $4n$ FLOPS with $n$ the dimensionality of the matrix.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+We present our Jacobi rotation eigenvalue$\backslash$eigenvector solver as well as the armadillo built-in eigenvalue$\backslash$eigenvector solver. These algorithms are performed to solve the Schrodinger equation for two particles in a 3-dimensional harmonic oscillator. Initially we analyze the case of non-interacting particles and then we move to the interacting case. We compare the speed of the algorithms as well as the resulting eigenvalues$\backslash$eigenvectors.
+\section{Theory}
+\subsection{One electron in a 3-dimensional Harmonic Oscillator Potential Well}
+We study the Schr\"{o}dinger equation for one electron. We assume spherical symmetry and thus the radial equation contains all of the interesting information. The radial equation reads:
+\begin{equation}
+  -\frac{\hbar^2}{2 m} \left ( \frac{1}{r^2} \frac{d}{dr} r^2
+  \frac{d}{dr} - \frac{l (l + 1)}{r^2} \right )R(r) 
+     + V(r) R(r) = E R(r).
+\end{equation}
+We consider only s-waves, $l=0$. For a 3-dimensional harmonic oscillator:
+\begin{equation}
+{V=\frac{1}{2}kr^2}
+\end{equation}
+where $k = m\omega^2$. The radial equation can be simplified through the substitution of the wavefunction $u(r) = rR(r)$, the constants $\alpha = (\frac{\hbar^2}{mk})^{1/4}$ and $\lambda = \frac{2m\alpha^2}{\hbar^2}E$ and the parameter $\rho = \frac{r}{\alpha}$. The resulting equation reads:
+\begin{equation}
+-\frac{d^2}{d\rho^2}u(\rho)+\rho^2u(\rho) = \lambda u(\rho)
+\end{equation}
+
+\subsection{Two Electrons in a 3-dimensional Harmonic Oscillator Potential Well}
+The radial Schr\"{o}dinger equation for s-waves of two electrons in a 3-dimensional harmonic oscillator potential is written as:
+\begin{equation}
+ \left(-\frac{\hbar^2}{2 m}  \frac{d^2}{dr^2_1}
+     + \frac{1}{2}kr^2_1-\frac{\hbar^2}{2 m} \frac{d^2}{dr^2_2}
+          + \frac{1}{2}kr^2_2\right) u(r_1,r_2) = E u(r_1,r_2).
+\end{equation}
+We introduce the relative coordinate $\bf{r} = \bf{r}_1-\bf{r}_2$ and the center-of-mass coordinate $\bf{R} = \frac{1}{2}(\bf{r}_1+\bf{r}_2)$. Using these coordinates, the radial equation reads:
+\begin{equation}
+ \left(-\frac{\hbar^2}{m}  \frac{d^2}{dr^2}
+     + \frac{1}{4}kr^2-\frac{\hbar^2}{4 m} \frac{d^2}{dR^2}
+          + kR^2\right) u(r,R) = E u(r,R).
+\end{equation}
+We use the ansatz for separable equations, $u(r,R) = \Psi(r)\Phi(R)$. With this, energy can be written $E = E_r + E_R$. We will ignore center of mass energy. The coloumb interaction of two electrons is given by the potential:
+\begin{equation}
+V_c = \frac{\beta e^2}{r}
+\end{equation}
+where $\beta e^2$ = 1.44eVnm. This potential is added to the radial equation for the relative coordinate:
+\begin{equation}
+ \left(-\frac{\hbar^2}{m}  \frac{d^2}{dr^2}
+     + \frac{1}{4}kr^2+\frac{\beta e^2}{r}\right) \Psi(r) = E_r \Psi(r).
+\end{equation}
+We define the new frequency:
+\begin{equation}
+\omega_r^2 = \frac{1}{4}\frac{mk}{\hbar^2}\alpha^4
+\end{equation}
+where $\alpha = \frac{\hbar^2}{m\beta e^2}$. We use the previously defined variable $\rho$ and constant $\lambda$ to rewrite Schr\"{o}dinger's equation as:
+\begin{equation}
+ \left(-\frac{d^2}{d\rho^2}
+     + \omega_r^2\rho^2+\frac{1}{\rho}\right) \Psi(r) = \lambda_r \Psi(r).
+\end{equation}
+The repulsive term can be removed to consider the relative energy of non-interacting electrons
+
+\subsection{Unitary Transformations}
+Consider a basis vector $\mathbf{v}_{i}$:
+   \[
+	\mathbf{v}_i = \begin{bmatrix} v_{i1} \\ \dots \\ \dots \\v_{in} \end{bmatrix}
+	\]
+We take this basis to be orthogonal, $\mathbf{v}^{T}_{j} \mathbf{v}_{i} = \delta_{ij}$
+Upon transformation by a unitary matrix, $\mathbf{U}$ ($\mathbf{U} = \mathbf{U}^T = \mathbf{U}^{-1}$), the dot product of the basis remains the same and the orthogonality remains:
+
+\begin{equation*}
+\left(\mathbf{U} \mathbf{v}_j \right )^T \left(\mathbf{U} \mathbf{v}_i \right ) 
+= \mathbf{v}_j^T\left (\mathbf{U}^T\mathbf{U} \right )\mathbf{v}_i = \mathbf{v}_j^T \mathbf{v}_i  = \delta_{ij}
+\end{equation*}
+\section{Algorithms and methods}
+\subsection{Composing a matrix eigenvalue problem}
+For discretized calculations, we can approximate the second derivative according to:
+\begin{equation}
+u''=\frac{u(\rho+h)-2u(\rho)+u(\rho-h)}{h^2}+O(h^2)
+\end{equation}
+where $h$ is the step size and we can ignore terms quadratic in $h$ and higher due to their small contribution. We define minimum and maximum values for $\rho$, $\rho_{min} = 0$ and $\rho_{max}$, where $\rho_{max}$ would ideally be set to infinity, but is instead a large finite value convenient for calculations.
+
+Given a number, N, of mesh points, the step size for discretized calculations is given by:
+\begin{equation}
+	 h = \frac{\rho_N-\rho_0}{N}
+\end{equation}
+The value of $\rho$ at point $i$ is then given by:
+\begin{equation}
+\rho_i = \rho_0+ih \qquad i = 1,2, ... ,N
+\end{equation}
+With this, the discretized Schr\"{o}dinger equation can be written as:
+\begin{equation}
+-\frac{u_{i+1}-2u_i+u_{i-1}}{h^2}+V_i u_i = \lambda u_i
+\end{equation}
+where in the case of the harmonic oscillator, $V_i = \rho_i^2$. This equation in matrix form gives diagonal elements:
+\begin{equation}
+d_i = \frac{2}{h^2}+V_i
+\end{equation}
+and first non-diagonal elements:
+\begin{equation}
+e_i = -\frac{1}{h^2}
+\end{equation}
+We can set up the matrix eigenvalue problem:
+\begin{equation*}
+    \begin{bmatrix}d_0 & e_0 & 0   & 0    & \dots  &0     & 0 \\
+                                e_1 & d_1 & e_1 & 0    & \dots  &0     &0 \\
+                                0   & e_2 & d_2 & e_2  &0       &\dots & 0\\
+                                \dots  & \dots & \dots & \dots  &\dots      &\dots & \dots\\
+                                0   & \dots & \dots & \dots  &\dots  e_{N-1}     &d_{N-1} & e_{N-1}\\
+                                0   & \dots & \dots & \dots  &\dots       &e_{N} & d_{N}
+             \end{bmatrix}   \begin{bmatrix} u_{0} \\
+                                                                           u_{1} \\
+                                                                           \dots\\ \dots\\ \dots\\
+                                                                           u_{N}
+                          \end{bmatrix}=\lambda \begin{bmatrix} u_{0} \\
+                                                                           u_{1} \\
+                                                                           \dots\\ \dots\\ \dots\\
+                                                                           u_{N}
+                          \end{bmatrix}
+\end{equation*}
+\subsection{Jacobi's Rotation Algorithm}
+For Jacobi's rotation algorithm, it is convenient to define the quantities $tan\theta = s/c$, where $s = sin\theta$ and $c = cos\theta$ and 
+\begin{equation}
+cot 2 \theta = \tau = \frac{a_{ll} - a_{kk}}{2a_{kl}}
+\end{equation}
+We use an orthogonal (NxN) transformation matrix, $\bf{S}$. The nonzero elements of the matrix are given by:
+\begin{equation}
+s_{kk} = s_{ll} = c, s_{kl} = -s_{lk} = -s, s_{ii} = -s_{ii}=1, i \ne k,l
+\end{equation}
+A similarity transformation using this matrix, $\bf{B} = \bf{S^T}\bf{A}\bf{S}$, results in: \\
+\\
+$b_{ii}=a_{ii}, i\not{=}k, l$\\
+	$b_{ik}=a_{ik}c-a_{il}s, i\not{=}k, l$\\
+	$b_{il}=a_{il}c+a_{ik}s, i\not{=}k, l$\\
+	$b_{kk}=a_{kk}c^{2}-2a_{kl}cs+a_{ll}s^{2}$\\
+	$b_{ll}=a_{ll}c^{2}+2a_{kl}cs+a_{kk}s^{2}$\\
+	$b_{kl}=(a_{kk}-a_{ll})cs+a_{kl}(c^{2}-s^{2})$ \\
+	\\
+We choose $\theta$ that sets the highest non-diagonal matrix elements to zero. This leads to the quadratic equation:
+\begin{equation}
+t^2+2\tau t -1=0
+\end{equation}
+which results in:
+\begin{equation}
+t = -\tau \pm \sqrt{1+\tau^2}
+\end{equation}
+This equation is used to solve for theta, where the smallest root is chosen as this ensures minimization of the difference between matrix $A$ and $B$. In doing so, we minimize the norm of the off-diagonal matrix elements in $A$. This method diagonalizes the matrix, giving the eigenvalues and eigenvectors. In the implementation of this algorithm, rotations are performed until all off diagonal elements are less than a chosen tolerance, $\epsilon$, as reaching exactly zero for all off diagonal elements can be computationally consuming. 
+
+\begin{lstlisting}
+// Function to find the values of cos and sin
+mat rotate ( mat A, mat R, int k, int l, int n ) {
+  double s, c;
+  if ( A(k,l) != 0.0 ) {
+    double t, tau;
+    tau =( A(l,l) - A(k,k))/(2*A(k,l));
+    if ( tau > 0 ) {
+      t = tau + sqrt(1.0 + tau*tau);
+    } else {
+      t = -tau + sqrt(1.0 + tau*tau);
+    }
+    c = 1/sqrt(1+t*t);
+    s = c*t;
+  } else {
+    c = 1.0;
+    s = 0.0;
+  }
+  double a_kk, a_ll, a_ik, a_il, r_ik, r_il;
+  a_kk = A(k,k);
+  a_ll = A(l,l);
+  // changing the matrix elements with indices k and l
+  A(k,k) = c*c*a_kk - 2.0*c*s*A(k,l) + s*s*a_ll;
+  A(l,l) = s*s*a_kk + 2.0*c*s*A(k,l) + c*c*a_ll;
+  A(k,l) = 0.0; // hard-coding of the zeros
+  A(l,k) = 0.0;
+  // and then we change the remaining elements
+  for ( int i = 0; i < n; i++ ) {
+    if ( i != k && i != l ) {
+      a_ik = A(i,k);
+      a_il = A(i,l);
+      A(i,k) = c*a_ik - s*a_il;
+      A(k,i) = A(i,k);
+      A(i,l) = c*a_il + s*a_ik;
+      A(l,i) = A(i,l);
+    }
+    // Finally, we compute the new eigenvectors
+    r_ik = R(i,k);
+    r_il = R(i,l);
+    R(i,k) = c*r_ik - s*r_il;
+    R(i,l) = c*r_il + s*r_ik;
+  }
+  return A;
+}
+\end{lstlisting}
+\captionof{figure}{\label{fig1}Function that rotates the given matrix in order to minimize the specified off-diagonal matrix element. Computes the new }
+\begin{lstlisting}
+mat jacobi_method ( mat A, mat R, int n ) {
+  // Setting up the eigenvector matrix
+  for ( int i = 0; i < n; i++ ) {
+    for ( int j = 0; j < n; j++ ) {
+      if ( i == j ) {
+	R(i,j) = 1.0;
+      } else {
+	R(i,j) = 0.0;
+      }
+    }
+  }
+  int k, l;
+  double epsilon = 1.0e-30;
+  double max_number_iterations = (double) n * (double) n * (double) n;
+  int iterations = 0;
+  double max_offdiag = maxoffdiag ( A, &k, &l, n );
+  while ( fabs (max_offdiag) > epsilon && (double) iterations < max_number_iterations ) {
+    max_offdiag = maxoffdiag( A, &k, &l, n );
+    A = rotate ( A, R, k, l, n );
+    iterations++;
+  }
+  return A;
+}
+\end{lstlisting}
+\captionof{figure}{\label{fig2}Jacobi Rotation algorithm that produces a diagonal matrix revealing the eigenvalues of the original tridiagonal matrix.}
+
+\section{Results and discussions}
+\subsection{Unit Tests}
+In order to check the functionality of the discussed code, multiple unit tests are implemented throughout. 
+
+\quad The first test applies the Jacobi algorithm to a well-known 2x2 matrix. This test returns the expected eigenvalues and eigenvectors, which can be determined by hand or through the use of the armadillo built-in eigsym function. These values should be checked after changes are made to the code to ensure that functionality remains.
+
+\quad The next test proves that orthogonality remains after applying a rotation matrix to an orthogonal vector. It also shows that the dot product is conserved through these unitary transformations (Sec Theory)
+
+\begin{center}
+		\begin{tabular}{ccc}
+			\hline \hline
+			Mesh points |\quad & Armadillo Eigsym Time (s) \\
+			\hline		
+			500 & 0.199  \\
+			1000 & 1.564  \\
+			2000 & 12.688  \\
+			4000 &  102.179\\
+			\hline
+			\label{timingtable}
+		\end{tabular}
+	\end{center}
+	
+\begin{widetext}
+\begin{figure}[hbtp]
+\includegraphics[scale=0.4]{probPlots.png}
+\caption{Exact and numerial solutions for $n=10$ mesh points.} 
+\label{probability}
+\end{figure}
+\end{widetext}
+
+\section{Conclusions}
+
+%\begin{thebibliography}{99}
+%\bibitem{miller2006} G.~A.~Miller, A.~K.~Opper, and E.~J.~Stephenson, Annu.~Rev.~Nucl.~Sci.~{\bf %56}, 253 (2006).
+%\end{thebibliography}
+
+\end{document}

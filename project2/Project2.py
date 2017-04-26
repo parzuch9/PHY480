@@ -26,42 +26,51 @@ if failure:
 
 figfile_psi = filename+'psi.pdf'
 figfile_psi_square = filename+'psi_square.pdf'
-count = 0;
-colors = ['r','m','g','b']
-for i in {0.01,0.5,1,5}:
-    fileread = filename+str(count)
-    data = np.loadtxt(fileread)
-    r = data[:,0]
-    psi = data[:,1]
-    plt.plot(r,psi,colors[count]+':.',linewidth = 2.0,label = 'w = '+str(i))
-    count+=1
-
-plt.yscale('log')
-plt.autoscale(enable=True, axis = 'y')
-plt.xlabel(r'$r$',fontsize=16)
-plt.ylabel(r'$Psi$',fontsize=16)
-plt.legend()
-plt.savefig(figfile_psi)
-plt.clf()
-
 count = 0
+colors = ['r','m','g','b']
+maxdim = [50,10,5,5]
+j = 0
 
-for i in {0.01,0.5,1,5}:
+for i in [0.01,0.5,1.0,5.0]:
     fileread = filename+str(count)
     data = np.loadtxt(fileread)
     r = data[:,0]
-    psi = data[:,1]
-    psi_square = psi*psi
-    plt.plot(r,psi_square,colors[count]+':.',linewidth = 2.0,label = 'w = '+str(i))
+    psi = data[:,1] #r*np.exp(-E[count]*r**2/2)
+    plt.hold(True)
+    plt.plot(r,psi,colors[1]+':.',linewidth = 2.0,label = 'non-interacting')
     count+=1
 
-plt.yscale('log')
-plt.autoscale(enable=True, axis = 'y')
-plt.xlabel(r'$r$',fontsize=16)
-plt.ylabel(r'$Psi Squared$',fontsize=16)
-plt.legend()
-plt.savefig(figfile_psi_square)
-plt.clf()
+    fileread2 = filename+str(count)
+    data2 = np.loadtxt(fileread2)
+    r2 = data2[:,0]
+    psi2 = data2[:,1] #r*np.exp(-E[count]*r**2/2)
+    plt.plot(r2,psi2,colors[2]+':.',linewidth = 2.0,label = 'interacting')
+    #plt.yscale('log')
+    plt.autoscale(enable=True, axis = 'y')
+    plt.xlabel(r'$r$',fontsize=16)
+    plt.ylabel(r'$rPsi$',fontsize=16)
+    plt.xlim((0,maxdim[j]))
+    plt.title('omega ='+str(i))
+    plt.legend()
+    plt.savefig(filename+'psi'+str(count-1))
+    plt.clf()
+    count+=1
+
+    plt.hold(True)
+    plt.plot(r,psi**2,colors[1]+':.',linewidth = 2.0,label = 'non-interacting')
+   
+    plt.plot(r2,psi2**2,colors[2]+':.',linewidth = 2.0,label = 'interacting')
+    #plt.yscale('log')
+    plt.autoscale(enable=True, axis = 'y')
+    plt.xlabel(r'$r$',fontsize=16)
+    plt.ylabel(r'$r^2Psi^2$',fontsize=16)
+    plt.xlim((0,maxdim[j]))
+    plt.title('omega ='+str(i))
+    plt.legend()
+    plt.savefig(filename+'psisquare'+str(count-2))
+    plt.clf()
+    j+=1
+
 
 
 
