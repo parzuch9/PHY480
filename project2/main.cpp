@@ -18,6 +18,19 @@ const double kPi = 3.1415926535897;
 
 ofstream ofile;
 
+/*
+The function int comp()
+is a utility function for the library function qsort()
+to sort double numbers after increasing values.
+*/
+int comp(const double *val_1, const double *val_2)
+{
+if((*val_1) <= (*val_2)) return -1;
+else if((*val_1) > (*val_2)) return +1;
+else
+return 0;
+} // End: function comp()
+
 double maxoffdiag ( mat A, int * k, int * l, int n ) {
   double max = 0.0;
   for ( int i = 0; i < n; i++ ) {
@@ -76,7 +89,7 @@ mat rotate ( mat A, mat &R, int k, int l, int n ) {
   return A;
 }
 
-mat jacobi_method ( mat A, mat &R, int n ) {
+vec* jacobi_method ( mat A, mat &R, int n ) {
   // Setting up the eigenvector matrix
   for ( int i = 0; i < n; i++ ) {
     for ( int j = 0; j < n; j++ ) {
@@ -101,7 +114,19 @@ mat jacobi_method ( mat A, mat &R, int n ) {
   }
   cout << "Number of iterations: " << iterations << "\n";
   //cout<<"A: "<<A<<endl;
-  return A;
+
+  vec eigval[n];
+  for (int i=0;i<n;i++){
+    for (int j=0;i,n;i++){
+      if (i==j) {
+	eigval[i] = A(i,j);
+      }
+    }
+  }
+
+  qsort (eigval, n, sizeof(double), (int(*)(const void *,const void *))comp);
+
+  return eigval;
 }
 
 
@@ -205,22 +230,25 @@ int main(int argc, char *argv[]){
     
     //cout<< "Time for jacobi_method, non-interacting: "<< (double)(finish - start)/((double)CLOCKS_PER_SEC)<<endl;
 
-    mat R_test = zeros<mat>(2,2);
+    mat R_test = zeros<mat>(3,3);
 
-    mat test = zeros<mat>(2,2);
+    mat test = zeros<mat>(3,3);
 
     test(0,0) = 1;
     test(1,0) = test(0,1) = 2;
     test(1,1) = 1;
+    test(2,0) = test(0,2) = 3;
+    test(2,1) = test(1,2) = 4;
+    test(2,2) = 5;
     
-    //cout<<"Test, "<<test<<" has eigenvalues of: "<<jacobi_method(test,R_test,2);
+    cout<<"Test, "<<test<<" has eigenvalues of: "<<jacobi_method(test,R_test,3);
     
     int count = 0;
     int maxdim [4] = {50,10,5,5};
     int j=0;
     
 
-    //WTF IS WRONG
+    //WHAT IS WRONG
     //
     //
 
@@ -231,23 +259,23 @@ int main(int argc, char *argv[]){
       cout<<"frequency w = "<<w<<endl;
       for (int i=1;i<n-1;i++) {
 	A(i,i-1) = -1/hh;
-	A(i,i) = 2/hh+w*w*p[i]*p[i];//+1/p[i];
+	A(i,i) = 2/hh+w*w*p[i]*p[i]+1/p[i];
 	A(i,i+1) = -1/hh;
       }
 
       start = clock();
-      mat D = jacobi_method(A,R,n);
+      vec* D = jacobi_method(A,R,n);
       finish = clock();
 
       // cout<<"Eigenvectors: "<<endl;
       //cout<<R<<endl;
-      //cout<<"Eigenvalues: "<<endl;
-      //cout<<D<<endl;
-      cout<<"Eigvalue 1: "<<D(0,0)<<endl;
-      cout<<"2: "<<D(1,1)<<endl;
-      cout<<"3: "<<D(2,2)<<endl;
+      cout<<"Eigenvalues: "<<endl;
+      cout<<D<<endl;
+      //cout<<"Eigvalue 1: "<<D(0,0)<<endl;
+      //cout<<"2: "<<D(1,1)<<endl;
+      //cout<<"3: "<<D(2,2)<<endl;
 
-
+      //pg 230, qsort ch 7.8
 
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.28)  26 APR 2017 11:04
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.28)  26 APR 2017 10:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -335,31 +335,6 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip51
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count118
-\lst@gtempboxa=\box43
-\lst@token=\toks24
-\lst@length=\count119
-\lst@currlwidth=\dimen119
-\lst@column=\count120
-\lst@pos=\count121
-\lst@lostspace=\dimen120
-\lst@width=\dimen121
-\lst@newlines=\count122
-\lst@lineno=\count123
-\lst@maxwidth=\dimen122
-
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
-\c@lstnumber=\count124
-\lst@skipnumbers=\count125
-\lst@framebox=\box44
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2013/08/26 1.5b listings configuration
-))
-Package: listings 2013/08/26 1.5b (Carsten Heinz)
-
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
@@ -368,77 +343,43 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
-
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen123
-\captionmargin@=\dimen124
-\captionwidth=\dimen125
-\caption@tempdima=\dimen126
-\caption@indent=\dimen127
-\caption@parindent=\dimen128
-\caption@hangindent=\dimen129
-Package caption Info: Unknown document class (or package),
-(caption)             standard defaults will be used.
-)
-
-Package caption Warning: Unsupported document class (or package) detected,
-(caption)                usage of the caption package is not recommended.
-See the caption package documentation for explanation.
-
-Package caption Info: \@makecaption = \long macro:#1#2->\par \vskip \abovecapti
-onskip \begingroup \small \rmfamily \sbox \@tempboxa {\let \\\heading@cr \@make
-@capt@title {#1}{#2}}\@ifdim {\wd \@tempboxa >\hsize }{\begingroup \samepage \f
-lushing \let \footnote \@footnotemark@gobble \@make@capt@title {#1}{#2}\par \en
-dgroup }{\global \@minipagefalse \hb@xt@ \hsize {\hfil \unhbox \@tempboxa \hfil
- }}\endgroup \vskip \belowcaptionskip .
-\c@ContinuedFloat=\count126
-Package caption Info: hyperref package is loaded.
-Package caption Info: listings package is loaded.
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2013/08/26 1.5b listings language file
-)
-Class revtex4-1 Info: Patching array package. on input line 33.
-Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 33.
-
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 33.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 33.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 33.
+Class revtex4-1 Info: Patching array package. on input line 7.
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 7.
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 7.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 7.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 7.
 
 (./ReportProject2.aux)
 \openout1 = `ReportProject2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 7.
+LaTeX Font Info:    ... okay on input line 7.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count127
-\scratchdimen=\dimen130
-\scratchbox=\box45
-\nofMPsegments=\count128
-\nofMParguments=\count129
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count130
-\MPscratchDim=\dimen131
-\MPnumerator=\count131
-\makeMPintoPDFobject=\count132
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count118
+\scratchdimen=\dimen119
+\scratchbox=\box43
+\nofMPsegments=\count119
+\nofMParguments=\count120
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count121
+\MPscratchDim=\dimen120
+\MPnumerator=\count122
+\makeMPintoPDFobject=\count123
+\everyMPtoPDFconversion=\toks25
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -454,8 +395,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box46
-Package hyperref Info: Link coloring ON on input line 33.
+\AtBeginShipoutBox=\box44
+Package hyperref Info: Link coloring ON on input line 7.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -463,148 +404,77 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count133
+\c@section@level=\count124
 )
-LaTeX Info: Redefining \ref on input line 33.
-LaTeX Info: Redefining \pageref on input line 33.
-LaTeX Info: Redefining \nameref on input line 33.
+LaTeX Info: Redefining \ref on input line 7.
+LaTeX Info: Redefining \pageref on input line 7.
+LaTeX Info: Redefining \nameref on input line 7.
 
 (./ReportProject2.out) (./ReportProject2.out)
 \@outlinefile=\write4
 \openout4 = `ReportProject2.out'.
 
-\c@lstlisting=\count134
-Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: End \AtBeginDocument code.
-Class revtex4-1 Info: Taking \maketitle back from hyperref on input line 33.
+Class revtex4-1 Info: Taking \maketitle back from hyperref on input line 7.
 \openout3 = `ReportProject2Notes.bib'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 40.
+LaTeX Font Info:    Try loading font information for U+msa on input line 12.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 40.
+LaTeX Font Info:    Try loading font information for U+msb on input line 12.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
-\OT1/cmr/m/n/10 solver as well as the ar-madillo built-in
- []
+
+LaTeX Warning: File `test1.pdf' not found on input line 23.
 
 
-Overfull \hbox (0.91797pt too wide) detected at line 51
-[] \OMS/cmsy/m/n/10 ^^@ [] [] \OML/cmm/m/it/10 R\OT1/cmr/m/n/10 (\OML/cmm/m/it/
-10 r\OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 V\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r\O
-T1/cmr/m/n/10 )\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r\OT1/cmr/m/
-n/10 ) = \OML/cmm/m/it/10 ER\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r\OT1/cmr/m/n/10 
-)\OML/cmm/m/it/10 :
- []
+! Package pdftex.def Error: File `test1.pdf' not found.
 
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 \includegraphics[scale=0.4]{test1.pdf}
+                                           
+? 
+No file ReportProject2.bbl.
 
-Overfull \hbox (22.96721pt too wide) detected at line 67
-[] [] \OML/cmm/m/it/10 u\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r[]; r[]\OT1/cmr/m/n/
-10 ) = \OML/cmm/m/it/10 Eu\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r[]; r[]\OT1/cmr/m/
-n/10 )\OML/cmm/m/it/10 :
- []
-
-
-Overfull \hbox (5.25462pt too wide) detected at line 73
-[] [] \OML/cmm/m/it/10 u\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r; R\OT1/cmr/m/n/10 )
- = \OML/cmm/m/it/10 Eu\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 r; R\OT1/cmr/m/n/10 )\O
-ML/cmm/m/it/10 :
+Underfull \hbox (badness 1033) in paragraph at lines 31--32
+ []\OT1/cmr/m/n/9 G. A. Miller, A. K. Op-per, and E. J. Stephen-son,
  []
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (7.09828pt too wide) detected at line 151
-[] [] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 ^^U []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 160--171
-\OT1/cmr/m/n/10 A sim-i-lar-ity trans-for-ma-tion us-ing this ma-trix,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 160--171
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 160--171
-
- []
-
-
-Underfull \hbox (badness 3930) in paragraph at lines 160--171
-\OT1/cmr/m/n/10 We choose $\OML/cmm/m/it/10 ^^R$ \OT1/cmr/m/n/10 that sets the 
-high-est non-diagonal
- []
-
-[2]
-
-Package caption Warning: \captionsetup{type*=...} or \captionof
-(caption)                outside box or environment on input line 225.
-See the caption package documentation for explanation.
-
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 225.
-See the caption package documentation for explanation.
-
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 251.
-See the caption package documentation for explanation.
-
-<probPlots.png, id=125, 1256.695pt x 933.086pt>
-File: probPlots.png Graphic file (type png)
- <use probPlots.png>
-Package pdftex.def Info: probPlots.png used on input line 277.
-(pdftex.def)             Requested size: 502.6691pt x 373.22778pt.
-
-Overfull \hbox (256.6691pt too wide) in paragraph at lines 277--278
- [][] 
- []
-
-(./ReportProject2.bbl) [3] [4 <./probPlots.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 299.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 34.
  (./ReportProject2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 299.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 299.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 34.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 34.
 Package rerunfilecheck Info: File `ReportProject2.out' has not changed.
-(rerunfilecheck)             Checksum: A09153CA9ABB5478837037E42A921CBB;1034.
+(rerunfilecheck)             Checksum: 4D45662D30D69C93A47FFEEB031CBD10;415.
  ) 
 Here is how much of TeX's memory you used:
- 10428 strings out of 493304
- 151186 string characters out of 6139870
- 552389 words of memory out of 5000000
- 13654 multiletter control sequences out of 15000+600000
+ 7985 strings out of 493304
+ 112045 string characters out of 6139870
+ 211373 words of memory out of 5000000
+ 11337 multiletter control sequences out of 15000+600000
  14161 words of font info for 53 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,8n,40p,560b,1778s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on ReportProject2.pdf (4 pages, 314282 bytes).
+ 34i,7n,28p,253b,397s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmtt9.pfb>
+Output written on ReportProject2.pdf (1 page, 92218 bytes).
 PDF statistics:
- 278 PDF objects out of 1000 (max. 8388607)
- 248 compressed objects within 3 object streams
- 111 named destinations out of 1000 (max. 500000)
- 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 82 PDF objects out of 1000 (max. 8388607)
+ 68 compressed objects within 1 object stream
+ 10 named destinations out of 1000 (max. 500000)
+ 57 words of extra memory for PDF output out of 10000 (max. 10000000)
 
