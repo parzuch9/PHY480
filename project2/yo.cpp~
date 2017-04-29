@@ -18,6 +18,14 @@ const double kPi = 3.1415926535897;
 
 ofstream ofile;
 
+double potential(double p, double w) {
+  return w*w*p*p;
+}
+
+double potentialIn(double p, double w) {
+  return w*w*p*p+1/p;
+}
+
 /*
 The function int comp()
 is a utility function for the library function qsort()
@@ -89,7 +97,7 @@ mat rotate ( mat A, mat &R, int k, int l, int n ) {
   return A;
 }
 
-vec* jacobi_method ( mat A, mat &R, int n ) {
+vec jacobi_method ( mat A, mat &R, int n ) {
   // Setting up the eigenvector matrix
   for ( int i = 0; i < n; i++ ) {
     for ( int j = 0; j < n; j++ ) {
@@ -114,18 +122,47 @@ vec* jacobi_method ( mat A, mat &R, int n ) {
   }
   cout << "Number of iterations: " << iterations << "\n";
   //cout<<"A: "<<A<<endl;
-
-  vec eigval[n];
+  
+  cout<<"here"<<endl;
+  vec eigval = zeros<vec>(n);
+  
+  //cout<<"before:"<<eigval<<endl;
   for (int i=0;i<n;i++){
-    for (int j=0;i,n;i++){
-      if (i==j) {
-	eigval[i] = A(i,j);
-      }
+    eigval(i) = A(i,i);
+  }
+  cout<<"before:"<<eigval<<endl;
+
+  
+
+  vec eigval2(n);
+  eigval2 = sort(eigval);
+
+  vec index(n);
+  
+  cout<<"eigval2: "<<eigval2<<endl;
+  for (int i=0;i<n;i++) {
+    uvec test(n);
+    test =  find (eigval2 == eigval(i));
+    index(i) = test(0);
+  }
+
+  cout<<"eigvecs: "<<R<<endl;
+
+  cout<<"index: "<<index<<endl;
+
+  mat eigvec = zeros<mat>(n,n); 
+
+  for (int i=0;i<n;i++) {
+    for (int j=0;j<n;j++) {
+      eigvec(j,i) = R(j,index(i));
     }
   }
 
-  qsort (eigval, n, sizeof(double), (int(*)(const void *,const void *))comp);
+  R = eigvec;
+  cout<<"eigvecs: "<<R<<endl;
 
+  //eigval = sort(eigval);
+  //cout<<"after:"<<eigval<<endl;
   return eigval;
 }
 
@@ -181,33 +218,42 @@ int main(int argc, char *argv[]){
         filename = argv[1]; // first command line argument after name of program
         n = atoi(argv[2]);
     }
-    
+ 
     clock_t start, finish;
     
-    vec p(n); 
+    vec p = zeros<vec>(n);
+    vec V = zeros<vec>(n);
     
-    p[0] = 0; p[n] = 10;
+    double Rmin = 0; double Rmax = 10;
     mat A = zeros<mat>(n,n); 
-    double h = (p[n]-p[0])/n;
+    double h = (Rmax-Rmin)/n;
     double hh = h*h;
     cout<<"h: "<<h<<endl;
 
 
-    for (int i=1;i<n;i++) p[i] = h*i;
+    double w = 1;
+  
+
+    for (int i=0;i<n;i++){
+      p(i) = Rmin + h*(i+1);
+      V(i) = potential(p(i),w);
+    }
+      
  
-    A(0,0) = 2/hh;
+    A(0,0) = 2/hh+V(0);
     A(0,1) = -1/hh;
     A(n-1,n-2) = -1/hh;
-    A(n-1,n-1) = 2/hh+p[n-1]*p[n-1];
+    A(n-1,n-1) = 2/hh+V(n-1);
 
     for (int i=1;i<n-1;i++) {
       A(i,i-1) = -1/hh;
-      A(i,i) = 2/hh+p[i]*p[i];
+      A(i,i) = 2/hh+V(i);
       A(i,i+1) = -1/hh;
     }
     
-    vec eigval;
-    mat eigvec;
+    vec eigval = zeros<vec>(n);
+    
+    mat eigvec = zeros<vec>(n);
     
     //call armadillo function to find eigenvalues of symmetric matricies
     //start = clock();
@@ -242,94 +288,59 @@ int main(int argc, char *argv[]){
     test(2,2) = 5;
     
     cout<<"Test, "<<test<<" has eigenvalues of: "<<jacobi_method(test,R_test,3);
-    
-    int count = 0;
-    int maxdim [4] = {50,10,5,5};
-    int j=0;
-    
+
 
     //WHAT IS WRONG
     //
     //
 
-    double w = 1;
-    
-    for (int i=1;i<n;i++) p[i] = h*i;
-    
-      cout<<"frequency w = "<<w<<endl;
-      for (int i=1;i<n-1;i++) {
-	A(i,i-1) = -1/hh;
-	A(i,i) = 2/hh+w*w*p[i]*p[i]+1/p[i];
-	A(i,i+1) = -1/hh;
-      }
-
+    //cout<<"Matrix: "<<endl;
+    //cout<<A<<endl;
       start = clock();
-      vec* D = jacobi_method(A,R,n);
+
+      eig_sym(eigval,eigvec,A);
+	//vec D = jacobi_method(A,R,n);
       finish = clock();
 
       // cout<<"Eigenvectors: "<<endl;
       //cout<<R<<endl;
       cout<<"Eigenvalues: "<<endl;
-      cout<<D<<endl;
-      //cout<<"Eigvalue 1: "<<D(0,0)<<endl;
-      //cout<<"2: "<<D(1,1)<<endl;
-      //cout<<"3: "<<D(2,2)<<endl;
+      //cout<<eigval<<endl;
+      cout<<"Eigvalue 1: "<<eigval(0)<<endl;
+      cout<<"2: "<<eigval(1)<<endl;
+      cout<<"3: "<<eigval(2)<<endl;
 
-      //pg 230, qsort ch 7.8
-
-
-
-
-
-
-
-
-
-
-    /*
-    vec p(n); 
-
-    p[0] = 0; p[n] = 50;
-    mat A = zeros<mat>(n,n); 
-    double h = (p[n]-p[0])/n;
-    double hh = h*h;
-    cout<<"h: "<<h<<endl;
-    
-    for (int i=1;i<n;i++) p[i] = h*i;
-    */
-    /*
+      /*
     for (double w : {0.01,0.25,1.0,5.0}) {
 
-      /*
-    p.zeros();
-    p[0] = 0; p[n] = maxdim[j];
-    //mat A = zeros<mat>(n,n); 
-    double h = (p[n]-p[0])/n;
-    double hh = h*h;
-    cout<<"h: "<<h<<endl;
-    j++;
-
       
-    for (int i=1;i<n;i++) p[i] = h*i;
-      */
+    for (int i=0;i<n;i++){
+      p(i) = Rmin + h*(i+1);
+      V(i) = potential(p(i),w);
+    }
+
+    
+    A(0,0) = 2/hh+V(0);
+    A(0,1) = -1/hh;
+    A(n-1,n-2) = -1/hh;
+    A(n-1,n-1) = 2/hh+V(n-1);
+
+    for (int i=1;i<n-1;i++) {
+      A(i,i-1) = -1/hh;
+      A(i,i) = 2/hh+V(i);
+      A(i,i+1) = -1/hh;
+    }
     /*
-      cout<<"frequency w = "<<w<<endl;
-      for (int i=1;i<n-1;i++) {
-	A(i,i-1) = -1/hh;
-	A(i,i) = 2/hh+w*w*p[i]*p[i];
-	A(i,i+1) = -1/hh;
-      }
-      /*
       start = clock();
       eig_sym(eigval,eigvec,A);
       finish = clock();
-      
+    */
       //cout<<"Eigenvalues, non-interacting: "<<eigval<<endl;
       //cout<<"Eigenvectors, interacting: "<<eigvec<<endl;
-
+      /*
       cout<< "Time for armadillo eig_sym, non interacting: "<< (double)(finish - start)/((double)CLOCKS_PER_SEC)<<endl;
-     */
-    /*
+     
+    
       start = clock();
       mat C = jacobi_method(A,R,n);
       finish = clock();
@@ -343,23 +354,34 @@ int main(int argc, char *argv[]){
       ofile.open(filename+to_string(count));
       ofile << setiosflags(ios::showpoint | ios::uppercase);
       for (int i = 0; i < n;i++) {
-        ofile << setw(15) << setprecision(8) << p[i];
+        ofile << setw(15) << setprecision(8) << p(i);
         ofile << setw(15) << setprecision(8) << R(i,0)<<endl;//eigvec(i,0) << endl;
 	
       }
       ofile.close();
       count++;
 
-      for (int i=1;i<n-1;i++) {
-	A(i,i) += 1/p[i];
+      for (int i=0;i<n;i++){
+        p(i) = Rmin + h*(i+1);
+        V(i) = potentialIn(p(i),w);
       }
+
+    
+      A(0,0) = 2/hh+V(0);
+      A(n-1,n-1) = 2/hh+V(n-1);
+
+      for (int i=1;i<n-1;i++) {
+        A(i,i) = 2/hh+V(i);
+      }
+    
       /*
       start = clock();
       eig_sym(eigval,eigvec,A);
       finish = clock();
-
+      */
+      /*
       cout<< "Time for armadillo eig_sym, interacting: "<< (double)(finish - start)/((double)CLOCKS_PER_SEC)<<endl;
-    *//*
+    
       start = clock();
       mat D = jacobi_method(A,R,n);
       finish = clock();
@@ -373,7 +395,7 @@ int main(int argc, char *argv[]){
       ofile.open(filename+to_string(count));
       ofile << setiosflags(ios::showpoint | ios::uppercase);
       for (int i = 0; i < n;i++) {
-        ofile << setw(15) << setprecision(8) << p[i];
+        ofile << setw(15) << setprecision(8) << p(i);
         ofile << setw(15) << setprecision(8) << R(i,0)<<endl;//eigvec(i,0) << endl;
       }
       ofile.close();

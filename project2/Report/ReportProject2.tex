@@ -222,10 +222,10 @@ mat rotate ( mat A, mat R, int k, int l, int n ) {
   return A;
 }
 \end{lstlisting}
-\captionof{figure}{\label{fig1}Function that rotates the given matrix in order to minimize the specified off-diagonal matrix element. Computes the new }
+\captionof{figure}{\label{fig1}Function that rotates the given matrix in order to minimize the specified off-diagonal matrix element. Computes the rotated eigenvectors}
 \begin{lstlisting}
-mat jacobi_method ( mat A, mat R, int n ) {
-  // Setting up the eigenvector matrix
+vec jacobi_method ( mat A, mat &R, int n ) {
+  //setting up the eigenvector matrix
   for ( int i = 0; i < n; i++ ) {
     for ( int j = 0; j < n; j++ ) {
       if ( i == j ) {
@@ -236,56 +236,91 @@ mat jacobi_method ( mat A, mat R, int n ) {
     }
   }
   int k, l;
-  double epsilon = 1.0e-30;
+  double epsilon = 1.0e-10;
   double max_number_iterations = (double) n * (double) n * (double) n;
   int iterations = 0;
+  //find max off diagonal element 
   double max_offdiag = maxoffdiag ( A, &k, &l, n );
   while ( fabs (max_offdiag) > epsilon && (double) iterations < max_number_iterations ) {
     max_offdiag = maxoffdiag( A, &k, &l, n );
+    //perform the rotation to minimize the max off diagonal
     A = rotate ( A, R, k, l, n );
     iterations++;
   }
-  return A;
+  //organize eigenvalues and eigenvectors
+  vec eigval = zeros<vec>(n); 
+  for (int i=0;i<n;i++){
+    eigval(i) = A(i,i);
+  }
+  vec eigval2(n);
+  eigval2 = sort(eigval);
+  vec index(n);  
+  for (int i=0;i<n;i++) {
+    uvec temp(n);
+    temp =  find (eigval2 == eigval(i));
+    index(i) = test(0);
+  }
+  mat eigvec = zeros<mat>(n,n); 
+  for (int i=0;i<n;i++) {
+    for (int j=0;j<n;j++) {
+      eigvec(j,i) = R(j,index(i));
+    }
+  }
+  R = eigvec;
+  return eigval;
 }
+
 \end{lstlisting}
-\captionof{figure}{\label{fig2}Jacobi Rotation algorithm that produces a diagonal matrix revealing the eigenvalues of the original tridiagonal matrix.}
+\captionof{figure}{\label{fig2}Jacobi Rotation algorithm that produces a diagonal matrix revealing the eigenvalues of the original tridiagonal matrix. This function also organizes the eigenvalues and eigenvectors in ascending order.}
 
 \section{Results and discussions}
 \subsection{Unit Tests}
 In order to check the functionality of the discussed code, multiple unit tests are implemented throughout. 
 
-\quad The first test applies the Jacobi algorithm to a well-known 2x2 matrix. This test returns the expected eigenvalues and eigenvectors, which can be determined by hand or through the use of the armadillo built-in eigsym function. These values should be checked after changes are made to the code to ensure that functionality remains.
+\quad The first test applies the Jacobi algorithm to a 3x3 matrix. This test returns the expected eigenvalues and eigenvectors, which can be determined by hand or through the use of the Armadillo built-in Eigsym function. These values should be checked after changes are made to the code to ensure that functionality remains.
 
-\quad The next test proves that orthogonality remains after applying a rotation matrix to an orthogonal vector. It also shows that the dot product is conserved through these unitary transformations (Sec Theory)
+\quad The next test proves that orthogonality remains after applying a rotation matrix to an orthogonal vector. It also shows that the dot product is conserved through these unitary transformations (Sec. Theory). This test uses a simple matrix such as the one used in the unit test mentioned above. The code with unit tests included can be found on github.
+
+\subsection{Jacobi Algorithm vs. Armadillo Eigensym}
+The Jacobi Algorithm was rigorously compared the Eigensym function to test for differences. The eigenvalues found with each method are in good agreement. 
+
+\quad In Table 1, we see strong differences in the efficiency of each algorithm. For a given number of mesh points, this table presents an average time of completion for the algorithm, averaging over different frequencies and non-interacting and interacting cases. The Eigsym algorithm is over an order a magnitude faster than the Jacobi algorithm for the lowest number of mesh points analyzed. When we use the highest number of mesh points that the Jacobi algorithm can handle in a reasonable amount of time, the Eigsym algorithm is over 3 orders of magnitude faster. 4ooo mesh points using the Eigsym function can be completed in approximately the same amount of time as 300 mesh points using the Jacobi algorithm.
 
 \begin{center}
 		\begin{tabular}{ccc}
-			\hline \hline
-			Mesh points |\quad & Armadillo Eigsym Time (s) \\
-			\hline		
-			500 & 0.199  \\
-			1000 & 1.564  \\
-			2000 & 12.688  \\
-			4000 &  102.179\\
+		    \hline \hline
+			Mesh points  &| Arma Eigsym Time (s) &| Jacobi Time (s)\\
+			\hline
+			50 	& 0.0012 & 0.0642 \\
+			100 & 0.0057 & 0.9587	\\
+			200 & 0.0184 & 16.1497\\
+			300 & 0.0521 & 85.947\\	
+			500 & 0.199  & -\\
+			1000 & 1.564 & -\\
+			2000 & 12.688 & -\\
+			4000 &  102.179 & -\\
 			\hline
 			\label{timingtable}
 		\end{tabular}
 	\end{center}
-	
+\captionof{table}{\label{table1}Time for completion of both eigenvalue algorithms for a variety of mesh points. These times were averaged over interacting and non-interacting cases for a variety of frequencies. The Jacobi algorithm is increasingly less efficient when compared to the Armadillo Eigensym function for higher numbers of mesh points. At 500 mesh points, the Jacobi algorithm used more time than reasonably available.}	
+\subsection{Wavefunction for two Electrons in a Harmonic Oscillator Potential}
+Using the Armadillo function Eigsym, we were able to plot the wavefunction of two electrons in a Harmonic Oscillator Potential for the non-interacting and interacting cases for a variety of frequencies (fig3). We see that as frequency increases, the repulsive Coulomb potential from the interaction of two electrons becomes less prominent. It can be concluded that as the frequency decreases or as the potential well becomes shallower allowing for the electrons to be further apart, a stronger Coulomb interaction is in effect. This is due to the long range quality of the Coulomb interaction. 
 \begin{widetext}
 \begin{figure}[hbtp]
 \includegraphics[scale=0.4]{probPlots.png}
-\caption{Exact and numerial solutions for $n=10$ mesh points.} 
+\caption{Ground state wave function for the non-interacting and interacting cases at various frequencies. We see that as the frequency increases, the repulsive term in the potential becomes less These plots were made using the eigenvectors produced by the Armadillo Eigensym function.} 
 \label{probability}
 \end{figure}
 \end{widetext}
 
 \section{Conclusions}
-
+We built a Jacobi Rotation Algorithm to solve for the eigenvalues and eigenvectors of tridiagonal matricies. We have applied this technique to the case of two electrons in a harmonic oscillator potential. The resulting energy eigenvalues and wavefunction eigenvectors were found in good agreement with the built-in Armadillo eigenvalue solver, Eigensym and with theory[2]. The Jacobi Rotation Algorithm is limited in its efficiency, as it takes longer than a minute to solve matrices for mesh points larger than 200.   
 \section{References}
 \begin{thebibliography}{99}
 \bibitem{Armadillo} C.~Sanderson, and R.~ Curtin, Armadillo, Journal of Open Source Software $\bf{1}$(2). 2016.
 \bibitem{PhysRevA.48.3561} M. Taut,  Phys.~Rev.~A.~{\bf 48}, 5 (Nov 1993).
+\bibitem{Computational Physics} M. Hjorth-Jensen, Computational Physics, Lecture Notes. Aug 2015
 \end{thebibliography}
 
 %\cite{Armadillo}
